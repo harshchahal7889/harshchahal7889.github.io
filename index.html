@@ -4,55 +4,186 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Harsh Chahal | Portfolio</title>
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; font-family: Arial, Helvetica, sans-serif; }
-    body { background: #0f172a; color: #e5e7eb; line-height: 1.6; }
-    a { color: #38bdf8; text-decoration: none; }
-    header { padding: 60px 20px; text-align: center; background: #020617; }
-    header h1 { font-size: 2.8rem; }
-    header p { margin-top: 10px; font-size: 1.1rem; color: #94a3b8; }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
 
-    section { padding: 60px 10%; }
-    h2 { font-size: 2rem; margin-bottom: 20px; border-left: 4px solid #38bdf8; padding-left: 10px; }
+    body {
+      background: linear-gradient(135deg, #020617, #0f172a);
+      color: #e5e7eb;
+      line-height: 1.7;
+    }
 
-    .about p { max-width: 800px; color: #cbd5f5; }
+    a {
+      color: #38bdf8;
+      text-decoration: none;
+      font-weight: 500;
+    }
 
-    .skills ul { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px; list-style: none; }
-    .skills li { background: #020617; padding: 15px; border-radius: 8px; text-align: center; }
+    a:hover {
+      text-decoration: underline;
+    }
 
-    .projects .card { background: #020617; padding: 20px; border-radius: 10px; margin-bottom: 20px; }
-    .projects h3 { margin-bottom: 10px; }
+    /* HEADER */
+    header {
+      padding: 90px 20px;
+      text-align: center;
+      background: radial-gradient(circle at top, #020617, #000);
+    }
 
-    .education ul { list-style: none; }
-    .education li { margin-bottom: 15px; }
+    header h1 {
+      font-size: 3rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+    }
 
-    footer { text-align: center; padding: 30px; background: #020617; color: #94a3b8; }
+    header p {
+      margin-top: 12px;
+      font-size: 1.15rem;
+      color: #94a3b8;
+    }
 
+    header .links {
+      margin-top: 18px;
+    }
+
+    /* SECTIONS */
+    section {
+      padding: 70px 12%;
+    }
+
+    h2 {
+      font-size: 2.1rem;
+      margin-bottom: 30px;
+      position: relative;
+      display: inline-block;
+    }
+
+    h2::after {
+      content: '';
+      width: 50%;
+      height: 4px;
+      background: #38bdf8;
+      position: absolute;
+      bottom: -8px;
+      left: 0;
+      border-radius: 10px;
+    }
+
+    /* ABOUT */
+    .about p {
+      max-width: 850px;
+      font-size: 1.05rem;
+      color: #cbd5f5;
+    }
+
+    /* SKILLS */
+    .skills ul {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 18px;
+      list-style: none;
+    }
+
+    .skills li {
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(10px);
+      padding: 16px;
+      border-radius: 12px;
+      text-align: center;
+      transition: transform 0.3s ease, background 0.3s ease;
+    }
+
+    .skills li:hover {
+      transform: translateY(-6px);
+      background: rgba(56, 189, 248, 0.15);
+    }
+
+    /* PROJECTS */
+    .projects .card {
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(12px);
+      padding: 28px;
+      border-radius: 16px;
+      margin-bottom: 25px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .projects .card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+    }
+
+    .projects h3 {
+      margin-bottom: 10px;
+      font-size: 1.3rem;
+      color: #e2e8f0;
+    }
+
+    .projects p {
+      color: #cbd5f5;
+    }
+
+    /* EDUCATION */
+    .education ul {
+      list-style: none;
+    }
+
+    .education li {
+      background: rgba(255, 255, 255, 0.05);
+      padding: 20px;
+      border-radius: 12px;
+      max-width: 600px;
+    }
+
+    /* FOOTER */
+    footer {
+      text-align: center;
+      padding: 35px;
+      background: #020617;
+      color: #94a3b8;
+      font-size: 0.9rem;
+    }
+
+    /* RESPONSIVE */
     @media (max-width: 768px) {
-      header h1 { font-size: 2.2rem; }
-      section { padding: 40px 6%; }
+      header h1 {
+        font-size: 2.3rem;
+      }
+
+      section {
+        padding: 50px 7%;
+      }
     }
   </style>
 </head>
+
 <body>
 
   <header>
     <h1>Harsh Chahal</h1>
     <p>B.Tech (CSE) Student | Aspiring Software Developer</p>
-    <p>
-      <a href="mailto:your-harshchahal7889@gmail.com">Email</a> ·
+    <div class="links">
+      <a href="mailto:harshchahal7889@gmail.com">Email</a> ·
       <a href="https://github.com/harshchahal7889" target="_blank">GitHub</a> ·
       <a href="https://linkedin.com/in/yourusername" target="_blank">LinkedIn</a>
-    </p>
+    </div>
   </header>
 
   <section class="about">
     <h2>About Me</h2>
     <p>
-      I am a Computer Science Engineering student with strong interest in programming,
+      I am a Computer Science Engineering student with a strong interest in programming,
       problem-solving, and software development. I enjoy building projects, learning
-      new technologies, and improving my coding skills through practice and
-      competitive programming.
+      new technologies, and improving my skills through continuous practice.
     </p>
   </section>
 
@@ -64,7 +195,7 @@
       <li>C / C++</li>
       <li>Data Structures</li>
       <li>HTML & CSS</li>
-      <li>Basic JavaScript</li>
+      <li>JavaScript (Basic)</li>
       <li>OOP Concepts</li>
       <li>Problem Solving</li>
     </ul>
@@ -76,33 +207,34 @@
     <div class="card">
       <h3>Hotel Reservation System (Customer Module)</h3>
       <p>
-        A console-based application that allows customers to search rooms,
-        make reservations, and manage bookings.
+        Console-based system for searching rooms, booking reservations,
+        and managing customer records.
       </p>
       <p><strong>Tech:</strong> Java</p>
     </div>
 
     <div class="card">
-      <h3>Capacitive Touch Activated Pulse (Without Arduino)</h3>
+      <h3>Capacitive Touch Activated Pulse</h3>
       <p>
-        An electronics-based project demonstrating pulse generation using
-        capacitive touch without microcontrollers.
+        Electronics project demonstrating pulse generation using capacitive touch
+        without microcontrollers.
       </p>
       <p><strong>Tech:</strong> Electronics</p>
     </div>
-
   </section>
 
   <section class="education">
     <h2>Education</h2>
     <ul>
-      <li><strong>B.Tech in Computer Science Engineering</strong><br>
-          2nd Year (Semester 4)</li>
+      <li>
+        <strong>B.Tech in Computer Science Engineering</strong><br>
+        2nd Year (Semester 4)
+      </li>
     </ul>
   </section>
 
   <footer>
-    <p>© 2026 Harsh Chahal | Portfolio Website</p>
+    © 2026 Harsh Chahal | Portfolio Website
   </footer>
 
 </body>
