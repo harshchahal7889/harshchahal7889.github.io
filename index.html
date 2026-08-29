@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Harsh Chahal.</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --bg:#FDF0F3;--bg2:#F9E4EA;--text:#1a0a10;--text2:#6b3a4a;--text3:#b08090;
+  --card:#fff;--cb:#F0C8D4;--nav-bg:rgba(253,240,243,0.92);
+  --accent:#C2185B;--accent2:#880E4F;--glow:rgba(194,24,91,0.22);
+}
+[data-theme="dark"]{
+  --bg:#080C14;--bg2:#0D1220;--text:#E8EDF8;--text2:#8090B0;--text3:#445;
+  --card:#101828;--cb:#1A2540;--nav-bg:rgba(8,12,20,0.92);
+  --accent:#4D9FFF;--accent2:#1A6FD4;--glow:rgba(77,159,255,0.3);
+}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;overflow-x:hidden;transition:background .35s,color .35s;}
+
+/* CURSOR */
+#cur{position:fixed;width:14px;height:14px;border-radius:50%;background:var(--accent);pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:transform .08s,width .2s,height .2s;opacity:.85;}
+#cur2{position:fixed;width:38px;height:38px;border-radius:50%;border:1.5px solid var(--accent);pointer-events:none;z-index:9998;transform:translate(-50%,-50%);opacity:.35;transition:left .12s,top .12s;}
+@media(hover:none){#cur,#cur2{display:none;}}
+
+/* NAV */
+nav{position:fixed;top:16px;left:50%;transform:translateX(-50%);z-index:1000;display:flex;align-items:center;justify-content:space-between;width:min(680px,92vw);background:var(--nav-bg);backdrop-filter:blur(20px);border:1px solid var(--cb);border-radius:50px;padding:9px 10px 9px 18px;gap:10px;}
+.nav-logo{font-size:14px;font-weight:600;color:var(--text);letter-spacing:.02em;white-space:nowrap;}
+.nav-logo span{opacity:.35;margin-right:7px;font-size:12px;}
+.nav-links{display:flex;gap:4px;}
+.nav-links a{color:var(--text2);text-decoration:none;font-size:13px;font-weight:500;padding:7px 12px;border-radius:20px;transition:all .2s;}
+.nav-links a:hover{color:var(--text);background:var(--bg2);}
+.nav-actions{display:flex;gap:8px;align-items:center;}
+.nav-btn{background:none;border:1px solid var(--cb);border-radius:50%;width:34px;height:34px;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--text2);font-size:15px;transition:all .2s;}
+.nav-btn:hover,.nav-btn.active{background:var(--accent);color:#fff;border-color:var(--accent);}
+#cdot{width:7px;height:7px;border-radius:50%;background:#22c55e;animation:dp 1.2s infinite;margin-right:2px;}
+@keyframes dp{0%,100%{opacity:1;}50%{opacity:.25;}}
+@media(max-width:720px){.nav-links{display:none;}}
+
+/* SECTIONS */
+section{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;padding:110px 24px 60px;}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;background:var(--card);border:1px solid var(--cb);border-radius:50px;padding:6px 14px;font-size:12px;color:var(--text2);font-weight:500;margin-bottom:20px;}
+.eyebrow span{width:7px;height:7px;background:var(--accent);border-radius:50%;}
+.sec-title{font-family:'Playfair Display',serif;font-size:clamp(32px,5vw,48px);text-align:center;margin-bottom:12px;}
+.sec-title em{color:var(--accent);font-style:italic;}
+.sec-sub{color:var(--text2);text-align:center;max-width:520px;font-size:15px;line-height:1.7;margin-bottom:48px;}
+
+/* HERO */
+#hero{background:var(--bg);overflow:hidden;}
+.hero-bg{position:absolute;inset:0;pointer-events:none;overflow:hidden;}
+.hb-circle{position:absolute;border-radius:50%;filter:blur(80px);}
+.hb1{width:600px;height:600px;background:radial-gradient(circle,rgba(255,182,193,.45),transparent 70%);top:-160px;left:-120px;}
+.hb2{width:500px;height:500px;background:radial-gradient(circle,rgba(255,105,135,.18),transparent 70%);bottom:-100px;right:-100px;}
+.hb3{width:350px;height:350px;background:radial-gradient(circle,rgba(255,218,224,.6),transparent 70%);top:30%;left:40%;}
+[data-theme="dark"] .hb1{background:radial-gradient(circle,rgba(77,159,255,.18),transparent 70%);}
+[data-theme="dark"] .hb2{background:radial-gradient(circle,rgba(30,80,180,.15),transparent 70%);}
+[data-theme="dark"] .hb3{display:none;}
+
+#blossom-canvas{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:1;}
+[data-theme="dark"] #blossom-canvas{display:none;}
+
+#scene{position:relative;z-index:2;margin-bottom:28px;width:180px;height:200px;}
+#robot-group{width:100%;height:100%;transition:filter .3s;}
+#robot-group:hover{filter:drop-shadow(0 0 24px var(--glow));}
+
+.hero-tag{display:inline-flex;align-items:center;gap:8px;background:var(--card);border:1px solid var(--cb);border-radius:50px;padding:6px 14px;font-size:12px;color:var(--text2);font-weight:500;margin-bottom:20px;position:relative;z-index:2;}
+.hero-tag span{width:7px;height:7px;background:#22c55e;border-radius:50%;animation:dp 1.8s infinite;}
+.hero-title{text-align:center;position:relative;z-index:2;margin-bottom:16px;}
+.hero-title .l1{font-family:'Playfair Display',serif;font-style:italic;font-size:clamp(48px,9vw,88px);color:var(--accent);display:block;line-height:1;}
+.hero-title .l2{font-family:'Playfair Display',serif;font-size:clamp(48px,9vw,88px);color:var(--text);display:block;line-height:1.05;}
+#typed{border-right:3px solid var(--accent);padding-right:3px;}
+.hero-sub{text-align:center;color:var(--text2);font-size:clamp(14px,2vw,16px);line-height:1.8;max-width:500px;position:relative;z-index:2;margin-bottom:32px;}
+.hero-sub strong{color:var(--text);font-weight:600;}
+.hero-cap{font-size:12px;color:var(--text3);z-index:2;position:relative;text-align:center;margin-bottom:36px;}
+.hero-cap strong{color:var(--text2);font-weight:500;}
+.hero-cta{display:flex;gap:12px;position:relative;z-index:2;flex-wrap:wrap;justify-content:center;}
+.btn{padding:12px 26px;border-radius:50px;font-size:14px;font-weight:600;text-decoration:none;transition:all .2s;border:1px solid var(--cb);}
+.btn-fill{background:var(--accent);color:#fff;}
+.btn-fill:hover{background:var(--accent2);}
+.btn-ghost{color:var(--text);}
+.btn-ghost:hover{background:var(--card);}
+
+/* SKILLS */
+#skills{background:var(--bg2);}
+.skill-grid{display:grid;grid-template-columns:repeat(4,minmax(120px,150px));gap:16px;position:relative;z-index:2;}
+@media(max-width:600px){.skill-grid{grid-template-columns:repeat(2,minmax(120px,150px));}}
+.skill-card{background:var(--card);border:1px solid var(--cb);border-radius:18px;padding:22px 14px;display:flex;flex-direction:column;align-items:center;gap:10px;transition:all .25s;}
+.skill-card:hover{transform:translateY(-5px);border-color:var(--accent);box-shadow:0 12px 30px var(--glow);}
+.skill-icon{font-family:'Playfair Display',serif;font-weight:700;font-style:italic;font-size:20px;color:var(--accent);width:44px;height:44px;border-radius:50%;background:var(--bg2);display:flex;align-items:center;justify-content:center;}
+[data-theme="dark"] .skill-icon{background:var(--bg);}
+.skill-name{font-size:13px;font-weight:600;color:var(--text);}
+.skill-tag{font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:.06em;}
+
+/* PROJECTS */
+#projects{background:var(--bg);}
+.proj-wrap{width:100%;max-width:920px;display:flex;flex-direction:column;gap:18px;position:relative;z-index:2;}
+.proj-card{background:var(--card);border:1px solid var(--cb);border-radius:20px;padding:26px 28px;display:flex;gap:20px;align-items:flex-start;transition:all .25s;}
+.proj-card:hover{border-color:var(--accent);box-shadow:0 14px 34px var(--glow);transform:translateY(-3px);}
+.proj-cat{flex-shrink:0;width:130px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--accent);line-height:1.5;padding-top:3px;}
+.proj-body{flex:1;}
+.proj-title{font-family:'Playfair Display',serif;font-size:20px;margin-bottom:6px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
+.proj-link{font-size:11px;font-weight:600;text-transform:none;font-family:'Inter',sans-serif;color:var(--text2);text-decoration:none;border:1px solid var(--cb);padding:3px 10px;border-radius:20px;transition:all .2s;}
+.proj-link:hover{color:#fff;background:var(--accent);border-color:var(--accent);}
+.proj-desc{color:var(--text2);font-size:14px;line-height:1.7;margin-bottom:12px;}
+.proj-stack{display:flex;gap:8px;flex-wrap:wrap;}
+.proj-chip{font-size:11px;background:var(--bg2);color:var(--text2);padding:4px 10px;border-radius:20px;border:1px solid var(--cb);font-weight:500;}
+@media(max-width:600px){.proj-card{flex-direction:column;}.proj-cat{width:auto;}}
+
+/* CONTACT */
+#contact{background:var(--bg2);}
+.ci{text-align:center;position:relative;z-index:2;max-width:560px;}
+.ci h2{font-family:'Playfair Display',serif;font-style:italic;font-size:clamp(32px,6vw,52px);margin-bottom:14px;color:var(--text);}
+.ci p{color:var(--text2);font-size:15px;line-height:1.7;margin-bottom:36px;}
+.contact-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-bottom:8px;}
+@media(max-width:560px){.contact-grid{grid-template-columns:1fr;}}
+.contact-card{background:var(--card);border:1px solid var(--cb);border-radius:16px;padding:16px 18px;display:flex;align-items:center;gap:14px;text-decoration:none;color:var(--text);transition:all .2s;}
+.contact-card:hover{border-color:var(--accent);transform:translateY(-3px);box-shadow:0 10px 24px var(--glow);}
+.cc-icon{width:38px;height:38px;border-radius:50%;background:var(--bg2);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;}
+[data-theme="dark"] .cc-icon{background:var(--bg);}
+.cc-label{font-size:11px;color:var(--text3);text-transform:uppercase;letter-spacing:.05em;}
+.cc-value{font-size:13px;font-weight:600;word-break:break-all;}
+.fn{margin-top:40px;font-size:12px;color:var(--text3);}
+</style>
+</head>
+
+<body>
+
+<canvas id="blossom-canvas"></canvas>
+<div id="cur"></div>
+<div id="cur2"></div>
+
+<nav>
+  <div class="nav-logo"><span>☰</span>Harsh Chahal.</div>
+  <div class="nav-links">
+    <a href="#skills">Skills</a>
+    <a href="#projects">Projects</a>
+    <a href="#contact">Contact</a>
+  </div>
+  <div class="nav-actions">
+    <div id="cdot"></div>
+    <button class="nav-btn" id="theme-btn">☀️</button>
+  </div>
+</nav>
+
+<section id="hero">
+  <div class="hero-bg">
+    <div class="hb-circle hb1"></div>
+    <div class="hb-circle hb2"></div>
+    <div class="hb-circle hb3"></div>
+  </div>
+
+  <div class="hero-tag"><span></span> Available for internships & collabs</div>
+
+  <div id="scene">
+    <svg id="robot-group" viewBox="0 0 200 220" xmlns="http://www.w3.org/2000/svg">
+      <rect x="55" y="70" width="90" height="90" rx="20" fill="var(--card)" stroke="var(--accent)" stroke-width="3"/>
+      <rect x="75" y="30" width="50" height="45" rx="14" fill="var(--card)" stroke="var(--accent)" stroke-width="3"/>
+      <circle cx="92" cy="52" r="6" fill="var(--accent)"/>
+      <circle cx="118" cy="52" r="6" fill="var(--accent)"/>
+      <rect x="96" y="14" width="8" height="18" rx="4" fill="var(--accent)"/>
+      <circle cx="100" cy="12" r="6" fill="var(--accent)"/>
+      <rect x="35" y="90" width="18" height="55" rx="9" fill="var(--card)" stroke="var(--accent)" stroke-width="3"/>
+      <rect x="147" y="90" width="18" height="55" rx="9" fill="var(--card)" stroke="var(--accent)" stroke-width="3"/>
+      <rect x="72" y="160" width="20" height="40" rx="8" fill="var(--card)" stroke="var(--accent)" stroke-width="3"/>
+      <rect x="108" y="160" width="20" height="40" rx="8" fill="var(--card)" stroke="var(--accent)" stroke-width="3"/>
+      <rect x="78" y="95" width="44" height="30" rx="8" fill="var(--bg2)"/>
+      <circle cx="90" cy="110" r="5" fill="var(--accent)"/>
+      <circle cx="110" cy="110" r="5" fill="var(--accent)"/>
+    </svg>
+  </div>
+
+  <div class="hero-title">
+    <span class="l1"><span id="typed">Software</span></span>
+    <span class="l2">Developer.</span>
+  </div>
+
+  <p class="hero-sub">
+    Harsh Chahal builds algorithm-driven systems, full-stack applications,<br>
+    and clean, purposeful code — <strong>fast, structured, and reliable.</strong>
+  </p>
+
+  <p class="hero-cap">
+    Student at <strong>Graphic Era University, Dehradun</strong> · <strong>B.Tech (CSE)</strong> · 2024 – 2028 · 8.3 CGPA
+  </p>
+
+  <div class="hero-cta">
+    <a href="#projects" class="btn btn-fill">View Projects</a>
+    <a href="#contact" class="btn btn-ghost">Get in Touch</a>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="eyebrow"><span></span> Toolbox</div>
+  <h2 class="sec-title">Languages & <em>Tools</em></h2>
+  <p class="sec-sub">The core stack I build with — from low-level systems and algorithm work to full-stack web development.</p>
+
+  <div class="skill-grid">
+    <div class="skill-card">
+      <div class="skill-icon">C++</div>
+      <div class="skill-name">C++</div>
+      <div class="skill-tag">DSA & Algo</div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-icon">C</div>
+      <div class="skill-name">C</div>
+      <div class="skill-tag">Systems</div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-icon">Jv</div>
+      <div class="skill-name">Java</div>
+      <div class="skill-tag">Backend</div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-icon">Py</div>
+      <div class="skill-name">Python</div>
+      <div class="skill-tag">Scripting</div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-icon">Js</div>
+      <div class="skill-name">JavaScript</div>
+      <div class="skill-tag">Frontend</div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-icon">Nd</div>
+      <div class="skill-name">Node.js</div>
+      <div class="skill-tag">Backend</div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-icon">Tw</div>
+      <div class="skill-name">Tailwind</div>
+      <div class="skill-tag">Frontend</div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-icon">Mo</div>
+      <div class="skill-name">MongoDB</div>
+      <div class="skill-tag">Database</div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-icon">My</div>
+      <div class="skill-name">MySQL</div>
+      <div class="skill-tag">Database</div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-icon">Pg</div>
+      <div class="skill-name">Postgres</div>
+      <div class="skill-tag">Database</div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-icon">Aw</div>
+      <div class="skill-name">AWS</div>
+      <div class="skill-tag">Cloud</div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-icon">Rd</div>
+      <div class="skill-name">Redis</div>
+      <div class="skill-tag">System Design</div>
+    </div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="eyebrow"><span></span> Selected Work</div>
+  <h2 class="sec-title">Featured <em>Projects</em></h2>
+  <p class="sec-sub">A mix of full-stack builds, systems programming, and algorithm-heavy coursework spanning JavaScript, C/C++, and Java.</p>
+
+  <div class="proj-wrap">
+
+    <div class="proj-card">
+      <div class="proj-cat">Full-Stack<br>Web Dev</div>
+      <div class="proj-body">
+        <div class="proj-title">Handy — Local Worker Platform</div>
+        <div class="proj-desc">A full-stack service marketplace built with Agile methodology, connecting users with verified local workers via role-based authentication (users, workers, admins) following MVC design patterns. Features secure JWT auth, worker verification workflows, a booking management system, and protected REST APIs with input validation and error handling. Real-time bidirectional messaging powered by Socket.io lets users and workers chat live during active bookings, backed by MongoDB schemas optimized for scalable, microservices-ready data handling and a responsive Next.js + Tailwind CSS frontend.</div>
+        <div class="proj-stack">
+          <span class="proj-chip">Node.js</span>
+          <span class="proj-chip">Next.js</span>
+          <span class="proj-chip">MongoDB</span>
+          <span class="proj-chip">JWT</span>
+          <span class="proj-chip">Socket.io</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="proj-card">
+      <div class="proj-cat">Systems<br>& OS</div>
+      <div class="proj-body">
+        <div class="proj-title">Virtual Memory Manager</div>
+        <div class="proj-desc">A virtual memory management simulation built in C on Linux, implementing paging and page replacement strategies including FIFO, LRU, and Clock. Benchmarks algorithm performance across varied workloads, quantifying trade-offs between memory usage and page fault rates to evaluate real-world OS scheduling impact — all within a modular, extensible codebase built for easy experimentation with custom policies.</div>
+        <div class="proj-stack">
+          <span class="proj-chip">C</span>
+          <span class="proj-chip">Linux</span>
+          <span class="proj-chip">FIFO/LRU/Clock</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="proj-card">
+      <div class="proj-cat">Algorithms<br>& DAA</div>
+      <div class="proj-body">
+        <div class="proj-title">Pac-Man — AI &amp; Graph Algorithms</div>
+        <div class="proj-desc">An AI-based Pac-Man game built around DAA concepts — graph traversal and shortest-path algorithms drive intelligent ghost movement via Dijkstra's Algorithm, with dynamic programming and hashing optimizing gameplay across 10+ test scenarios. Pathfinding and game-state management were optimized using graphs, priority queues, and hashing, cutting path computation time by 30%.</div>
+        <div class="proj-stack">
+          <span class="proj-chip">C++</span>
+          <span class="proj-chip">Dijkstra's</span>
+          <span class="proj-chip">DP</span>
+          <span class="proj-chip">Hashing</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="proj-card">
+      <div class="proj-cat">Networking<br>& Security</div>
+      <div class="proj-body">
+        <div class="proj-title">Deep Packet Inspection</div>
+        <div class="proj-desc">A C++ packet analyzer that reads and processes raw PCAP files, parsing Ethernet, IPv4, TCP, and UDP headers to extract network-level information. Implements TLS Client Hello and SNI extraction to identify hostnames from encrypted traffic, classifying activity across apps like YouTube, Google, Netflix, Amazon, and Microsoft — built on 5-tuple packet-flow analysis with protocol-aware parsing and byte-order handling.</div>
+        <div class="proj-stack">
+          <span class="proj-chip">C++</span>
+          <span class="proj-chip">PCAP</span>
+          <span class="proj-chip">TLS/SNI</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="proj-card">
+      <div class="proj-cat">Backend<br>& Concurrency</div>
+      <div class="proj-body">
+        <div class="proj-title">Real-Time Stock Simulation</div>
+        <div class="proj-desc">A Java-based application simulating a stock trading system where users buy and sell stocks as prices fluctuate dynamically in real time. Real-time price movement is simulated using Java background threads, supporting 10+ concurrent stock updates during application testing.</div>
+        <div class="proj-stack">
+          <span class="proj-chip">Java</span>
+          <span class="proj-chip">Multithreading</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section id="contact">
+  <div class="ci">
+    <div class="eyebrow"><span></span> Get in Touch</div>
+    <h2>Let's Connect.</h2>
+    <p>Open to internships, collaborations, and interesting problems worth solving.</p>
+
+    <div class="contact-grid">
+      <a class="contact-card" href="tel:+919682308292">
+        <div class="cc-icon">📞</div>
+        <div>
+          <div class="cc-label">Phone</div>
+          <div class="cc-value">+91 96823 08292</div>
+        </div>
+      </a>
+      <a class="contact-card" href="mailto:harshchahal7889@gmail.com">
+        <div class="cc-icon">✉️</div>
+        <div>
+          <div class="cc-label">Email</div>
+          <div class="cc-value">harshchahal7889@gmail.com</div>
+        </div>
+      </a>
+      <a class="contact-card" href="https://github.com/harshchahal7889" target="_blank" rel="noopener">
+        <div class="cc-icon">🐙</div>
+        <div>
+          <div class="cc-label">GitHub</div>
+          <div class="cc-value">harshchahal7889</div>
+        </div>
+      </a>
+      <a class="contact-card" href="https://linkedin.com/in/harshchahal" target="_blank" rel="noopener">
+        <div class="cc-icon">in</div>
+        <div>
+          <div class="cc-label">LinkedIn</div>
+          <div class="cc-value">harshchahal</div>
+        </div>
+      </a>
+    </div>
+
+    <p class="fn">Harsh Chahal © 2026 · Built with intention.</p>
+  </div>
+</section>
+
+<script>
+// CURSOR
+const cur=document.getElementById('cur'), cur2=document.getElementById('cur2');
+window.addEventListener('mousemove',e=>{
+  cur.style.left=e.clientX+'px'; cur.style.top=e.clientY+'px';
+  cur2.style.left=e.clientX+'px'; cur2.style.top=e.clientY+'px';
+});
+
+// THEME TOGGLE
+const themeBtn=document.getElementById('theme-btn');
+const root=document.documentElement;
+function setTheme(t){
+  root.setAttribute('data-theme',t);
+  themeBtn.textContent = t==='dark' ? '🌙' : '☀️';
+  localStorage.setItem('theme',t);
+}
+themeBtn.addEventListener('click',()=>{
+  setTheme(root.getAttribute('data-theme')==='dark'?'light':'dark');
+});
+setTheme(localStorage.getItem('theme')||'dark');
+
+// TYPED EFFECT
+const words=['Software','Full-Stack','Algorithm','C++','Java'];
+const typedEl=document.getElementById('typed');
+let wi=0, ci=0, deleting=false;
+function tick(){
+  const w=words[wi];
+  if(!deleting){
+    ci++; typedEl.textContent=w.slice(0,ci);
+    if(ci===w.length){deleting=true; setTimeout(tick,1400); return;}
+  } else {
+    ci--; typedEl.textContent=w.slice(0,ci);
+    if(ci===0){deleting=false; wi=(wi+1)%words.length;}
+  }
+  setTimeout(tick, deleting?60:110);
+}
+tick();
+
+// BLOSSOM CANVAS (light theme only)
+const canvas=document.getElementById('blossom-canvas');
+const ctx=canvas.getContext('2d');
+let W,H,petals=[];
+function resize(){W=canvas.width=innerWidth; H=canvas.height=innerHeight;}
+resize(); window.addEventListener('resize',resize);
+function Petal(){
+  this.x=Math.random()*W; this.y=Math.random()*-H;
+  this.r=3+Math.random()*5; this.speed=0.6+Math.random()*1.4;
+  this.drift=Math.random()*1.2-0.6; this.rot=Math.random()*360;
+  this.rotSpeed=(Math.random()-0.5)*2; this.opacity=0.4+Math.random()*0.5;
+}
+for(let i=0;i<40;i++) petals.push(new Petal());
+function drawPetal(p){
+  ctx.save();
+  ctx.translate(p.x,p.y); ctx.rotate(p.rot*Math.PI/180);
+  ctx.fillStyle=`rgba(255,182,193,${p.opacity})`;
+  ctx.beginPath();
+  ctx.ellipse(0,0,p.r,p.r*1.6,0,0,Math.PI*2);
+  ctx.fill(); ctx.restore();
+}
+function animate(){
+  ctx.clearRect(0,0,W,H);
+  if(root.getAttribute('data-theme')==='light'){
+    petals.forEach(p=>{
+      p.y+=p.speed; p.x+=p.drift; p.rot+=p.rotSpeed;
+      if(p.y>H+20){p.y=-20; p.x=Math.random()*W;}
+      drawPetal(p);
+    });
+  }
+  requestAnimationFrame(animate);
+}
+animate();
+</script>
+
+</body>
+</html>
